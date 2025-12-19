@@ -1,0 +1,7 @@
+*.pyc
+dist/
+build/
+phantominator.egg-info/
+.idea/
+generated_data/
+venv/
