@@ -7,7 +7,7 @@ by this handler function.  It serves to point to the correct
 implementation of Shepp-Logan to use given a set of parameters.
 """
 
-from phantominator import mr_shepp_logan, ct_shepp_logan
+from phantominator import ct_shepp_logan
 
 
 def shepp_logan(*args, **kwargs):
@@ -15,14 +15,8 @@ def shepp_logan(*args, **kwargs):
 
     Notes
     -----
-    See phantominator.mr_shepp_logan() and
-    phantominator.ct_shepp_logan() for docstrings explaining usage.
+    See phantominator.ct_shepp_logan() for docstrings explaining usage.
     """
 
-    MR = kwargs.get('MR', False)
-    if 'MR' in kwargs:
-        del kwargs['MR']
-
-    if MR:
-        return mr_shepp_logan(*args, **kwargs)
+    # Always use CT version (MR version removed)
     return ct_shepp_logan(*args, **kwargs)

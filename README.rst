@@ -1,53 +1,39 @@
+Shepp-Logan Phantom Data Generator
+===================================
+
 **Forked from https://github.com/mckib2/phantominator**
 
-This NLeSC fork has the goal of generating a syntethetic dataset of phantoms for AI training.
+This NLeSC fork is streamlined for generating synthetic Shepp-Logan phantom datasets for AI training.
 
 Installation
 ============
 
 .. code-block:: bash
 
-    python -m pip install phantominator
-
-The goal is to have easy installation and usage for everyone.  If
-something doesn't work, please open an issue and/or submit a pull
-request.  We'll get it figured out.
-
-`pygrappa` is an optional dependency required to run the
-`phantominator.examples.radial_coil_sens` example.
-
-About
-=====
-
-Python package for easy generation of numerical phantoms.  I often
-need a simple image to try something out on.  In MATLAB, I would use
-the `phantom` command to quickly get something to work with.  In
-Python, it's not always quite so easy, so I made this package that's quick
-to install and use so there's as little friction as possible.  There
-are other implementations of Shepp-Logan available from other
-projects, but they are usually not as easy to install or include other
-things that I don't want for this project.
-
-This package offers both CT and MR versions.
-
-Going forward, this module will support Python >= 3.8.
+    git clone https://github.com/NLeSC-Knowledge-Development/SLphantom-generator
+    cd SLphantom-generator
+    pip install -e .
 
 Usage
 =====
 
-Also see the `examples` module and docstrings.  The interface for CT
-phantom generation is similar to MATLAB's `phantom` function.
-
-Examples can be run as:
+Open the Jupyter notebook:
 
 .. code-block:: bash
 
-    # python -m phantominator.examples.[example-name], e.g.:
-    python -m phantominator.examples.shepp_logan
+    jupyter notebook phantominator/examples/shepp_logan.ipynb
 
-Basic usage:
+The notebook contains examples and a data generation workflow to create synthetic brain phantom images with variations for training neural networks.
 
-.. code-block:: python
+About
+=====
+
+Simplified Python package for generating Shepp-Logan phantom images. This fork focuses on:
+
+- CT-style phantom generation
+- Batch data generation with anatomical variations
+- LoRA dataset format (images + metadata.jsonl)
+- Easy-to-use Jupyter notebook interface
 
     # CT phantom
     from phantominator import shepp_logan
@@ -61,39 +47,26 @@ The 2D Shepp-Logan exists at z=-0.25, so if we want just a subset
 along the z-axis with the first slice being the traditional 2D
 phantom, we can use the `zlims` option:
 
+
+Core Functions
+==============
+
 .. code-block:: python
 
     from phantominator import shepp_logan
-    M0, T1, T2 = shepp_logan((64, 64, 5), MR=True, zlims=(-.25, .25))
 
-We can also generate simple oscillating concentric circles:
+    # Generate a simple CT phantom
+    ph = shepp_logan(128, modified=True)
 
-.. code-block:: python
+    # Generate a 3D phantom
+    ph = shepp_logan((128, 128, 20), zlims=(-.5, .5))
 
-    # Dynamic (concentric circles), 20 time frames
-    from phantominator import dynamic
-    ph = dynamic(128, 20)
+    # Get ellipse parameters for customization
+    ph, E = shepp_logan(128, modified=True, ret_E=True)
 
-If we want to modify ellipse/ellipsoid parameters or we just want to
-see what they are.  For example, we can get the MR ellipsoid
-parameters like this:
+See the notebook for detailed examples of batch generation with anatomical variations.
 
-.. code-block:: python
+License
+=======
 
-    from phantominator import mr_ellipsoid_parameters
-    E = mr_ellipsoid_parameters()
-
-See docstrings for `ct_shepp_logan`, and `mr_shepp_logan` for how
-the array `E` is structured.  It follows conventions from MATLAB's
-phantom function.
-
-Arbitrary k-space sampling is supported for the single coil 2D
-Shepp-Logan phantom:
-
-.. code-block:: python
-
-    # Given k-space coordinates (kx, ky), where kx and ky are 1D
-    # arrays using the same unit conventions as BART's traj command,
-    # we can find the corresponding k-space measurements:
-    from phantominator import kspace_shepp_logan
-    k = kspace_shepp_logan(kx, ky)
+See LICENSE file (original MIT license from mckib2/phantominator).
