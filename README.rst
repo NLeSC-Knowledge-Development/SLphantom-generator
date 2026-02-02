@@ -82,7 +82,7 @@ You can modify the following 6 parameters specifically via the prompt or configu
 
 In addition to these controlled features, the generator applies **random affine transformations** (global rotation/translation and local element jitter) to ensure dataset diversity and realism.
 
-.. image:: phantominator/examples/example.png
+.. image:: phantominator/examples/parameter_visualization.png
    :alt: Visualization of controlled parameters
    :align: center
 
