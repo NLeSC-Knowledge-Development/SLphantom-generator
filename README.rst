@@ -66,6 +66,33 @@ Core Functions
 
 See the notebook for detailed examples of batch generation with anatomical variations.
 
+Controlled Data Generation
+==========================
+
+The notebook ``phantominator/examples/shepp_logan.ipynb`` includes a specialized generator for creating training datasets with controlled anatomical features.
+
+You can modify the following 6 parameters specifically via the prompt or configuration:
+
+1. **Ventricles Size**: Controls the scale of the lateral ventricles (Ellipses 2 & 3).
+2. **Bone Thickness**: Adjusts the thickness of the outer skull layer (Gap between Ellipse 0 & 1).
+3. **Brain Scale**: Scales the overall brain size (white/gray matter area).
+4. **Number of Lesions**: Randomly adds 0 to 5 lesions (bright spots) in valid brain areas.
+5. **Lesion Size**: Scales the size of the generated lesions.
+6. **CSF Size**: Scales the central cerebrospinal fluid structure (Ellipse 4).
+
+In addition to these controlled features, the generator applies **random affine transformations** (global rotation/translation and local element jitter) to ensure dataset diversity and realism.
+
+.. image:: phantominator/examples/example.png
+   :alt: Visualization of controlled parameters
+   :align: center
+
+Example Prompt
+--------------
+
+The generator produces captions in ``metadata.jsonl`` that reflect the controlled parameters. An example caption looks like:
+
+    "Synthetic Shepp-Logan phantom with large ventricles, normal skull bone, normal brain area, 3 lesions, small lesions, large CSF"
+
 License
 =======
 
