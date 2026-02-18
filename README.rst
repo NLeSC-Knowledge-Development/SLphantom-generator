@@ -80,6 +80,10 @@ You can modify the following 6 parameters specifically via the prompt or configu
 5. **Lesion Size**: Scales the size of the generated lesions.
 6. **CSF Size**: Scales the central cerebrospinal fluid structure (Ellipse 4).
 
+.. image:: phantominator/examples/SL-annotated.jpg
+   :alt: Annotated Shepp-Logan brain CT phantom with simple example anatomical fearures.
+   :align: center
+
 In addition to these controlled features, the generator applies **random affine transformations** (global rotation/translation and local element jitter) to ensure dataset diversity and realism.
 
 .. image:: phantominator/examples/parameter_visualization.png
