@@ -81,7 +81,7 @@ You can modify the following 6 parameters specifically via the prompt or configu
 6. **CSF Size**: Scales the central cerebrospinal fluid structure (Ellipse 4).
 
 .. image:: phantominator/examples/SL-annotated.jpg
-   :alt: Annotated Shepp-Logan brain CT phantom with simple example anatomical fearures.
+   :alt: Annotated Shepp-Logan phantom with simple example anatomical fearures.
    :align: center
 
 In addition to these controlled features, the generator applies **random affine transformations** (global rotation/translation and local element jitter) to ensure dataset diversity and realism.
